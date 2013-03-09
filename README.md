@@ -1,3 +1,6 @@
+WA FreeNet Scripts
+==================
+
 Various scripts to do with the West Australian Wireless Freenet
 
 see http://www.wafreenet.org/
@@ -19,3 +22,4 @@ nodes in `pos.cfg` in the format
 	[Rottnest]
 	latlon = -32.001830,115.521347
 
+ie, standard configfile, and then run the pythin scripts, redirecting stdout
