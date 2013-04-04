@@ -92,10 +92,11 @@ void loop() {
   {
   //  for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
   //          int sensorReading = analogRead(analogChannel);
-            client.print("Welcome to TIC Hill Arduino EtherTen Listening on IP: ");
-            client.println(Ethernet.localIP());
+            client.print("<p>Welcome to TIC Hill Arduino EtherTen Listening on IP: ");
+            client.print(Ethernet.localIP());
+            client.println("</p>")
             client.println("<hr />")
-            client.print("<table border=\"2\">");
+            client.println("<table border=\"2\">");
             client.print("<tr>");
             client.print("<th>Sensor Name</th>");
             client.print("<th>Sensor Reading</th>");
@@ -107,75 +108,74 @@ void loop() {
             client.print("</td>");
             client.print("<td>");
             client.print(average0);
+            client.print("</td>");
             client.print("<td>");
             client.print("Amps");
             client.print("</td>");
-            client.print("</tr>");
+            client.println("</tr>");
             client.print("<tr>");
-            client.print("</td>");
             client.print("<td>");
             client.print("ACS712 Sensor A1 (WAFN Panel Curr (24V))");
             client.print("</td>");
             client.print("<td>");
             client.print(average1);
+            client.print("</td>");
             client.print("<td>");
             client.print("Amps");
             client.print("</td>");
-            client.print("</tr>");
+            client.println("</tr>");
             client.print("<tr>");
-            client.print("</td>");
             client.print("<td>");
             client.print("Voltage Sensor A2 (WAFN 230W PV)");
             client.print("</td>");
             client.print("<td>");
             client.print(average2);
+            client.print("</td>");
             client.print("<td>");
             client.print("Volts");
             client.print("</td>");
-            client.print("</tr>");
+            client.println("</tr>");
             client.print("<tr>");
-            client.print("</td>");
             client.print("<td>");
             client.print("Voltage Sensor A3 (WAFN 180W PV)");
             client.print("</td>");
             client.print("<td>");
             client.print(average3);
+            client.print("</td>");
             client.print("<td>");
             client.print("Volts");
             client.print("</td>");
-            client.print("</tr>");
+            client.println("</tr>");
             client.print("<tr>");
-            client.print("</td>");
             client.print("<td>");
             client.print("Voltage Sensor A4 (WAFN Batteries)");
             client.print("</td>");
             client.print("<td>");
             client.print(average4);
+            client.print("</td>");
             client.print("<td>");
             client.print("Volts");
             client.print("</td>");
-            client.print("</tr>");
+            client.println("</tr>");
             client.print("<tr>");
-            client.print("</td>");
             client.print("<td>");
             client.print("Voltage Sensor A5 (WARG Batteries)");
             client.print("</td>");
             client.print("<td>");
             client.print(average5);
+            client.print("</td>");
             client.print("<td>");
             client.print("Volts");
             client.print("</td>");
-            client.print("</tr>");
-            client.print("</td>");
-            client.print("</table>");
+            client.println("</tr>");
+            client.println("</table>");
 
-            client.println("<hr>");
+            client.println("<hr />");
             
             //client.println("This project was created by Mitch Kelly (VK6FLEX) for monitoring vital statistics of WAFreeNet solar power sites, Information on this device and the code used to program it can be found on my website http://www.gnu.pw/projects/. I can be E-Mailed on mitckelly24 at gmail.com");
-          client.println("<br>");
-           client.println("This page is served directly from a Freetronics EtherTen over the WAFreenet Wireless Network www.wafreenet.org");
-          client.println("<br>");
-          client.println("The following lines are for debug and graphing purposes:");
+           client.println("<p>This page is served directly from a Freetronics EtherTen over the WAFreenet Wireless Network www.wafreenet.org");
+          client.println("<br />");
+          client.println("The following lines are for debug and graphing purposes:</p>");
           client.println("<pre>");
 
           client.println("BEGIN DEBUG");
@@ -220,4 +220,3 @@ void loop() {
     Serial.println("client disonnected");
   }
 }
-
