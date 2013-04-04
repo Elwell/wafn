@@ -178,26 +178,21 @@ void loop() {
           client.println("<br />");
           client.println("The following lines are for debug and graphing purposes:</p>");
           client.println("<pre>");
-
-          client.println("BEGIN DEBUG");
-          client.print("WAFNLOADAMPS,");
+          // json version of output
+          client.print("{ \"TIC\": {");
+          client.print(" \"WAFN_LOAD_A\" : ");
           client.print(average0);
-          client.print(",");
-          client.print("WAFPANELAMPS,");
+          client.print(", \"WAFN_PANEL_A\" : ");
           client.print(average1);
-          client.print(",");
-          client.print("WAFNPV230VOLTS,");
+          client.print(", \"WAFN_PV230_v\" : ");
           client.print(average2);
-          client.print(",");
-          client.print("WAFNPV180VOLTS,");
+          client.print(", \"WAFN_PV180_v\" : ");
           client.print(average3);
-          client.print(",");
-          client.print("WAFNBATTVOLTS,");
+          client.print(", \"WAFN_BATT_v\" : ");
           client.print(average4);
-          client.print(",");
-          client.print("WARGBATTVOLTS,");
+          client.print(", \"WARG_BATT_v\" : ");
           client.println(average5);
-          client.println("END DEBUG");
+          client.println("}}");
           client.println("</pre>");
           client.println("</body></html>");
 
