@@ -94,8 +94,8 @@ void loop() {
   //          int sensorReading = analogRead(analogChannel);
             client.print("<p>Welcome to TIC Hill Arduino EtherTen Listening on IP: ");
             client.print(Ethernet.localIP());
-            client.println("</p>")
-            client.println("<hr />")
+            client.println("</p>");
+            client.println("<hr />");
             client.println("<table border=\"2\">");
             client.print("<tr>");
             client.print("<th>Sensor Name</th>");
