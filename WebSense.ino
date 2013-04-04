@@ -6,13 +6,22 @@
 
 byte mac[] = { 
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(10,60,140, 4);
-IPAddress gateway(10,60,140, 1);
+IPAddress ip(10,60,30, 3);
+IPAddress gateway(10,60,30, 1);
 EthernetServer server(80);
-
+  float R1 = 51000.0;    // !! resistance of R1 !!
+  float R2 = 5100.0;     // !! resistance of R2 !!
+//int vPin2 = 1;
+//int vPin2Real = 1;
 void setup() {
   Serial.begin(9600);
    while (!Serial) {
+     pinMode(A0, INPUT);
+     pinMode(A1, INPUT);
+     pinMode(A2, INPUT);
+     pinMode(A3, INPUT);
+     pinMode(A4, INPUT);
+     pinMode(A5, INPUT);
   }
 
 
@@ -48,21 +57,28 @@ void loop() {
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");
                     // add a meta refresh tag, so the browser pulls again every 5 seconds:
-          client.println("<meta http-equiv=\"refresh\" content=\"5\">");
+          client.println("<meta http-equiv=\"refresh\" content=\"15\">");
           // output the value of each analog input pin
     
-    int vPin2Read = analogRead(A2);
-    float vPin2Real = vPin2Read / 1023.0 * 52.50;
 
-   int vPin3Read = analogRead(A3);
-    float vPin3Real = vPin3Read / 1023.0 * 52.50;
 
-   int vPin4Read = analogRead(A4);
-    float vPin4Real = vPin4Read / 1023.0 * 52.50;
-
-    int vPin5Read = analogRead(A5);
-    float vPin5Real = vPin5Read / 1023.0 * 52.50;
-
+  float average2 = 0;
+  for(int i2 = 0; i2 < 1000; i2++) {
+    average2 = average2 + (.0264 * analogRead(A2) ) / 1023 * 3.0;
+  }
+  float average3 = 0;
+  for(int i3 = 0; i3 < 1000; i3++) {
+    average3 = average3 + (.0264 * analogRead(A3) ) / 1023 * 3.0;
+  }
+  float average4 = 0;
+  for(int i4 = 0; i4 < 1000; i4++) {
+    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 3.05;
+  }
+  float average5 = 0;
+  for(int i5 = 0; i5 < 1000; i5++) {
+    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 2.15;
+  }
+  
   float average0 = 0;
   for(int i0 = 0; i0 < 1000; i0++) {
     average0 = average0 + (.0264 * analogRead(A0) -13.47) / 490;
@@ -92,7 +108,7 @@ void loop() {
             client.println("<br>");
             client.print("<tr>"); 
             client.print("<td>"); 
-            client.print("ACS712 Sensor A0 (WAFreeNet Panels)");
+            client.print("ACS712 Sensor A0 (WAFN LOAD (12V))");
             client.print("</td>"); 
             client.print("<td>"); 
             client.print(average0);
@@ -103,7 +119,7 @@ void loop() {
             client.print("<tr>");
             client.print("</td>"); 
             client.print("<td>"); 
-            client.print("ACS712 Sensor A1 (WAFreeNet Load)");
+            client.print("ACS712 Sensor A1 (WAFN Panel Curr (24V))");
             client.print("</td>"); 
             client.print("<td>");
             client.print(average1);
@@ -114,10 +130,10 @@ void loop() {
             client.print("<tr>");
             client.print("</td>");
             client.print("<td>");
-            client.print("Voltage Sensor A2 (WAFreeNet Panels)");
+            client.print("Voltage Sensor A2 (WAFN 230W PV)");
             client.print("</td>");
             client.print("<td>");
-            client.print(vPin2Real);
+            client.print(average2);
             client.print("<td>"); 
             client.print("Volts");
             client.print("</td>"); 
@@ -125,10 +141,10 @@ void loop() {
             client.print("<tr>");
             client.print("</td>");
             client.print("<td>");
-            client.print("Voltage Sensor A3 (WAFreeNet Batteries)");
+            client.print("Voltage Sensor A3 (WAFN 180W PV)");
             client.print("</td>");
             client.print("<td>");
-            client.print(vPin3Real);
+            client.print(average3);
             client.print("<td>"); 
             client.print("Volts");
             client.print("</td>"); 
@@ -136,10 +152,10 @@ void loop() {
             client.print("<tr>");
             client.print("</td>");
             client.print("<td>");       
-            client.print("Voltage Sensor A4 (WARG Panels)");
+            client.print("Voltage Sensor A4 (WAFN Batteries)");
             client.print("</td>");
             client.print("<td>");
-            client.print(vPin4Real);
+            client.print(average4);
             client.print("<td>"); 
             client.print("Volts");
             client.print("</td>"); 
@@ -150,7 +166,7 @@ void loop() {
             client.print("Voltage Sensor A5 (WARG Batteries)");
             client.print("</td>");
             client.print("<td>");
-            client.print(vPin5Real);
+            client.print(average5);
             client.print("<td>"); 
             client.print("Volts");
             client.print("</td>"); 
@@ -160,7 +176,7 @@ void loop() {
 
             client.println("<hr>");
             
-            client.println("This project was created by Mitch Kelly (VK6FLEX) for monitoring vital statistics of WAFreeNet solar power sites, Information on this device and the code used to program it can be found on my website http://www.gnu.pw/projects/. I can be E-Mailed on mitckelly24 at gmail.com");
+            //client.println("This project was created by Mitch Kelly (VK6FLEX) for monitoring vital statistics of WAFreeNet solar power sites, Information on this device and the code used to program it can be found on my website http://www.gnu.pw/projects/. I can be E-Mailed on mitckelly24 at gmail.com");
           client.println("<br>");
            client.println("This page is served directly from a Freetronics EtherTen over the WAFreenet Wireless Network www.wafreenet.org");
           client.println("</html>");
@@ -173,43 +189,23 @@ void loop() {
 
           client.println("BEGIN DEBUG");
           client.println("<br>");
-          client.println("WAFNPANELAMPS: ");
-          client.print(average0);
-          client.println("<br>");
-          client.println("WAFNLOADAMPS: ");
-          client.print(average1);
-          client.println("<br>");
-          client.println("WAFNPANELVOLTS: ");
-          client.print(vPin2Real);
-          client.println("<br>");
-          client.println("WAFNBATTVOLTS: ");
-          client.print(vPin3Real);
-          client.println("<br>");
-          client.println("WARGPANELVOLTS: ");
-          client.print(vPin4Real);
-          client.println("<br>");
-          client.println("WARGBATTVOLTS: ");
-          client.print(vPin5Real);
-          client.println("<br>");
-          client.println("<br>");
-
-          client.print("WAFNPANELAMPS,");
-          client.print(average0);
-          client.print(",");
           client.print("WAFNLOADAMPS,");
+          client.print(average0);
+          client.print(",");
+          client.print("WAFPANELAMPS,");
           client.print(average1);
           client.print(",");
-          client.print("WAFNPANELVOLTS,");
-          client.print(vPin2Real);
+          client.print("WAFNPV230VOLTS,");
+          client.print(average2);
+          client.print(",");
+          client.print("WAFNPV180VOLTS,");
+          client.print(average3);
           client.print(",");
           client.print("WAFNBATTVOLTS,");
-          client.print(vPin3Real);
-          client.print(",");
-          client.print("WARGPANELVOLTS,");
-          client.print(vPin4Real);
+          client.print(average4);
           client.print(",");
           client.print("WARGBATTVOLTS,");
-          client.println(vPin5Real);
+          client.println(average5);
           client.print("<br>");
   
           client.print("<br>");
