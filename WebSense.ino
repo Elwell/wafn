@@ -51,13 +51,14 @@ void loop() {
         if (c == '\n' && currentLineIsBlank) {
           // send a standard http response header
           client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: text/html");
+          client.println("Content-Type: text/html; charset=utf-8");
           client.println("Connnection: close");
           client.println();
           client.println("<!DOCTYPE HTML>");
           client.println("<html><head>");
                     // add a meta refresh tag, so the browser pulls again every 5 seconds:
           client.println("<meta http-equiv=\"refresh\" content=\"15\">");
+          client.println("<title>TIC Hill monitoring</title>");
           client.println("</head><body>");
           // output the value of each analog input pin
 
@@ -96,7 +97,7 @@ void loop() {
             client.print(Ethernet.localIP());
             client.println("</p>");
             client.println("<hr />");
-            client.println("<table border=\"2\">");
+            client.println("<table border=\"1\">");
             client.print("<tr>");
             client.print("<th>Sensor Name</th>");
             client.print("<th>Sensor Reading</th>");
