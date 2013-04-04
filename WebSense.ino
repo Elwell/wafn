@@ -4,7 +4,7 @@
 #include <SPI.h>
 #include <Ethernet.h>
 
-byte mac[] = { 
+byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 IPAddress ip(10,60,30, 3);
 IPAddress gateway(10,60,30, 1);
@@ -44,7 +44,7 @@ void loop() {
       if (client.available()) {
         char c = client.read();
         Serial.write(c);
- 
+
        // if you've gotten to the end of the line (received a newline
         // character) and the line is blank, the http request has ended,
         // so you can send a reply
@@ -55,11 +55,12 @@ void loop() {
           client.println("Connnection: close");
           client.println();
           client.println("<!DOCTYPE HTML>");
-          client.println("<html>");
+          client.println("<html><head>");
                     // add a meta refresh tag, so the browser pulls again every 5 seconds:
           client.println("<meta http-equiv=\"refresh\" content=\"15\">");
+          client.println("</head><body>");
           // output the value of each analog input pin
-    
+
 
 
   float average2 = 0;
@@ -78,7 +79,7 @@ void loop() {
   for(int i5 = 0; i5 < 1000; i5++) {
     average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 2.15;
   }
-  
+
   float average0 = 0;
   for(int i0 = 0; i0 < 1000; i0++) {
     average0 = average0 + (.0264 * analogRead(A0) -13.47) / 490;
@@ -91,41 +92,35 @@ void loop() {
   {
   //  for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
   //          int sensorReading = analogRead(analogChannel);
-            client.print("Welcome to TIC Hill Arduino EtherTen Listening on IP: ");       
-            client.println(Ethernet.localIP());  
-            client.println("<hr>");       
-            client.print("<table border=2>");
+            client.print("Welcome to TIC Hill Arduino EtherTen Listening on IP: ");
+            client.println(Ethernet.localIP());
+            client.println("<hr />")
+            client.print("<table border=\"2\">");
+            client.print("<tr>");
+            client.print("<th>Sensor Name</th>");
+            client.print("<th>Sensor Reading</th>");
+            client.print("<th>Units</th>");
+            client.println("</tr>");
             client.print("<tr>");
             client.print("<td>");
-            client.print("<b> Sensor Name </b>");
-            client.print("</td>");
-            client.print("<td>");
-            client.print("<b> Sensor Reading </b>");
-            client.print("</td>");
-            client.print("<td>");
-            client.print("<b> Sensor Measurement </b>");
-            client.print("</td>");
-            client.println("<br>");
-            client.print("<tr>"); 
-            client.print("<td>"); 
             client.print("ACS712 Sensor A0 (WAFN LOAD (12V))");
-            client.print("</td>"); 
-            client.print("<td>"); 
+            client.print("</td>");
+            client.print("<td>");
             client.print(average0);
-            client.print("<td>"); 
+            client.print("<td>");
             client.print("Amps");
-            client.print("</td>"); 
+            client.print("</td>");
             client.print("</tr>");
             client.print("<tr>");
-            client.print("</td>"); 
-            client.print("<td>"); 
+            client.print("</td>");
+            client.print("<td>");
             client.print("ACS712 Sensor A1 (WAFN Panel Curr (24V))");
-            client.print("</td>"); 
+            client.print("</td>");
             client.print("<td>");
             client.print(average1);
-            client.print("<td>"); 
+            client.print("<td>");
             client.print("Amps");
-            client.print("</td>"); 
+            client.print("</td>");
             client.print("</tr>");
             client.print("<tr>");
             client.print("</td>");
@@ -134,9 +129,9 @@ void loop() {
             client.print("</td>");
             client.print("<td>");
             client.print(average2);
-            client.print("<td>"); 
+            client.print("<td>");
             client.print("Volts");
-            client.print("</td>"); 
+            client.print("</td>");
             client.print("</tr>");
             client.print("<tr>");
             client.print("</td>");
@@ -145,31 +140,31 @@ void loop() {
             client.print("</td>");
             client.print("<td>");
             client.print(average3);
-            client.print("<td>"); 
+            client.print("<td>");
             client.print("Volts");
-            client.print("</td>"); 
+            client.print("</td>");
             client.print("</tr>");
             client.print("<tr>");
             client.print("</td>");
-            client.print("<td>");       
+            client.print("<td>");
             client.print("Voltage Sensor A4 (WAFN Batteries)");
             client.print("</td>");
             client.print("<td>");
             client.print(average4);
-            client.print("<td>"); 
+            client.print("<td>");
             client.print("Volts");
-            client.print("</td>"); 
+            client.print("</td>");
             client.print("</tr>");
             client.print("<tr>");
             client.print("</td>");
-            client.print("<td>");       
+            client.print("<td>");
             client.print("Voltage Sensor A5 (WARG Batteries)");
             client.print("</td>");
             client.print("<td>");
             client.print(average5);
-            client.print("<td>"); 
+            client.print("<td>");
             client.print("Volts");
-            client.print("</td>"); 
+            client.print("</td>");
             client.print("</tr>");
             client.print("</td>");
             client.print("</table>");
@@ -179,16 +174,11 @@ void loop() {
             //client.println("This project was created by Mitch Kelly (VK6FLEX) for monitoring vital statistics of WAFreeNet solar power sites, Information on this device and the code used to program it can be found on my website http://www.gnu.pw/projects/. I can be E-Mailed on mitckelly24 at gmail.com");
           client.println("<br>");
            client.println("This page is served directly from a Freetronics EtherTen over the WAFreenet Wireless Network www.wafreenet.org");
-          client.println("</html>");
-          client.println("<br>");
-          client.println("<br>");
           client.println("<br>");
           client.println("The following lines are for debug and graphing purposes:");
-          client.println("<br>");
-          client.println("<br>");
+          client.println("<pre>");
 
           client.println("BEGIN DEBUG");
-          client.println("<br>");
           client.print("WAFNLOADAMPS,");
           client.print(average0);
           client.print(",");
@@ -206,11 +196,9 @@ void loop() {
           client.print(",");
           client.print("WARGBATTVOLTS,");
           client.println(average5);
-          client.print("<br>");
-  
-          client.print("<br>");
           client.println("END DEBUG");
-
+          client.println("</pre>");
+          client.println("</body></html>");
 
   }
           break;
@@ -218,7 +206,7 @@ void loop() {
         if (c == '\n') {
           // you're starting a new line
           currentLineIsBlank = true;
-        } 
+        }
         else if (c != '\r') {
           // you've gotten a character on the current line
           currentLineIsBlank = false;
