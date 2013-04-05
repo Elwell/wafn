@@ -174,7 +174,7 @@ void loop() {
             client.println("<hr />");
             
             //client.println("This project was created by Mitch Kelly (VK6FLEX) for monitoring vital statistics of WAFreeNet solar power sites, Information on this device and the code used to program it can be found on my website http://www.gnu.pw/projects/. I can be E-Mailed on mitckelly24 at gmail.com");
-           client.println("<p>This page is served directly from a Freetronics EtherTen over the WAFreenet Wireless Network www.wafreenet.org");
+           client.println("<p>This page is served directly from a Freetronics EtherTen over the <a href=\"http://www.wafreenet.org/\">WAFreenet Wireless Network</a>");
           client.println("<br />");
           client.println("The following lines are for debug and graphing purposes:</p>");
           client.println("<pre>");
