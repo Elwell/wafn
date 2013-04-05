@@ -8,7 +8,7 @@ import csv
 from os.path import exists
 import time
 
-source = 'http://203.59.39.17/env/tic/'
+source = 'http://10.60.30.3/'
 log = 'tic.csv'
 needheader = False
 
@@ -18,7 +18,8 @@ if not exists(log):
 
 # For TIC we know the expected fields
 fields = ["timestamp","WARG_BATT_V","WAFN_BATT_V","WAFN_PV180_V", "WAFN_LOAD_A","WAFN_PV230_V", "WAFN_PANEL_A"]
-out = csv.DictWriter(open("tic.csv","a"),fields)
+fh = open(log,"a")
+out = csv.DictWriter(fh,fields)
 
 if needheader:
 	out.writeheader()
@@ -37,5 +38,7 @@ while True:
 
 	out.writerow(data['TIC'])
 	print json.dumps(data)
+	fh.flush() # manually call this each cycle - we could do this less freq if needed
 
 	time.sleep(15)
+fh.close()
