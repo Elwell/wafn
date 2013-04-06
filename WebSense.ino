@@ -1,3 +1,5 @@
+/// Removed a few int that are no longer used.
+// Added in an Actuall chage current field
 // Most of this code written by Mitch Kelly mitchkelly24@gmail.com
 // If you use it, Email me.
 
@@ -91,8 +93,9 @@ void loop() {
   }
 
   {
-  //  for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
-  //          int sensorReading = analogRead(analogChannel);
+// Simple Math to work out rough charging current to about .5A~ Resolution
+float ACC = average1 * average3 / 14.7;
+
             client.print("<p>Welcome to TIC Hill Arduino EtherTen Listening on IP: ");
             client.print(Ethernet.localIP());
             client.println("</p>");
@@ -120,6 +123,17 @@ void loop() {
             client.print("</td>");
             client.print("<td>");
             client.print(average1);
+            client.print("</td>");
+            client.print("<td>");
+            client.print("Amps");
+            client.print("</td>");
+            client.println("</tr>");
+            client.print("<tr>");
+            client.print("<td>");
+            client.print("ACS712 Sensor A1 (Actuall Chg Curr (14.7V))");
+            client.print("</td>");
+            client.print("<td>");
+            client.print(ACC);
             client.print("</td>");
             client.print("<td>");
             client.print("Amps");
