@@ -1,4 +1,5 @@
 // Removed a few int that are no longer used.
+// Added in an Actuall chage current field
 // Most of this code written by Mitch Kelly mitchkelly24@gmail.com
 // If you use it, Email me.
 
