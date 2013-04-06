@@ -17,7 +17,7 @@ if not exists(log):
 	needheader = True
 
 # For TIC we know the expected fields
-fields = ["timestamp","WARG_BATT_V","WAFN_BATT_V","WAFN_PV180_V", "WAFN_LOAD_A","WAFN_PV230_V", "WAFN_PANEL_A"]
+fields = ["timestamp","WARG_BATT_V","WAFN_BATT_V","WAFN_PV180_V", "WAFN_LOAD_A","WAFN_PV230_V", "WAFN_PANEL_A", "CHARGE_A"]
 fh = open(log,"a")
 out = csv.DictWriter(fh,fields)
 
