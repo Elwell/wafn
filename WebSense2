@@ -1,0 +1,2 @@
+// Removed a few int that are no longer used.
+// Changed samping to 10 samples to overcome ramdom 0 reads on the voltage sensors.
