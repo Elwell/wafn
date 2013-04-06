@@ -1,5 +1,3 @@
-/// Removed a few int that are no longer used.
-// Added in an Actuall chage current field
 // Most of this code written by Mitch Kelly mitchkelly24@gmail.com
 // If you use it, Email me.
 
@@ -67,20 +65,20 @@ void loop() {
 
 
   float average2 = 0;
-  for(int i2 = 0; i2 < 1000; i2++) {
-    average2 = average2 + (.0264 * analogRead(A2) ) / 1023 * 3.0;
+  for(int i2 = 0; i2 < 500; i2++) {
+    average2 = average2 + (.0264 * analogRead(A2) ) / 1023 * 6.20;
   }
   float average3 = 0;
-  for(int i3 = 0; i3 < 1000; i3++) {
-    average3 = average3 + (.0264 * analogRead(A3) ) / 1023 * 3.0;
+  for(int i3 = 0; i3 < 500; i3++) {
+    average3 = average3 + (.0264 * analogRead(A3) ) / 1023 * 6.20;
   }
   float average4 = 0;
-  for(int i4 = 0; i4 < 1000; i4++) {
-    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 3.05;
+  for(int i4 = 0; i4 < 500; i4++) {
+    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
   }
   float average5 = 0;
-  for(int i5 = 0; i5 < 1000; i5++) {
-    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 2.15;
+  for(int i5 = 0; i5 < 500; i5++) {
+    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
   }
 
   float average0 = 0;
