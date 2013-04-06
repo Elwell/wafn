@@ -85,6 +85,54 @@ void loop() {
   float average1 = 0;
   for(int i1 = 0; i1 < 1000; i1++) {
     average1 = average1 + (.0264 * analogRead(A1) -13.47) / 490;
+
+  }
+// Simple If statements to filter out valused below 12
+// First cycle
+if (average4 < 12)
+{
+  float average4 = 0;
+  for(int i4 = 0; i4 < 500; i4++) {
+    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
+  }
+}
+if (average5 < 12)
+{
+  float average5 = 0;
+  for(int i5 = 0; i5 < 500; i5++) {
+    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
+}
+  }
+// Second Cycle
+  if (average4 < 12)
+{
+  float average4 = 0;
+  for(int i4 = 0; i4 < 500; i4++) {
+    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
+  }
+}
+if (average5 < 12)
+{
+  float average5 = 0;
+  for(int i5 = 0; i5 < 500; i5++) {
+    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
+}
+  }
+// Third Cycle
+if (average4 < 12)
+{
+  float average4 = 0;
+  for(int i4 = 0; i4 < 500; i4++) {
+    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
+  }
+}
+  
+if (average5 < 12)
+{
+  float average5 = 0;
+  for(int i5 = 0; i5 < 500; i5++) {
+    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
+}
   }
 
   {
