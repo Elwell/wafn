@@ -134,12 +134,12 @@ void loop() {
 
 	// adc value is already averaged so we can convert directly
 	/* for the ACS712 calculations there are several contradicting calculations:
-	     http://embedded-lab.com/blog/?p=4529 says 0.0264 * (U - 512)
-             http://www.lucadentella.it/en/2011/11/29/sensore-di-corrente-con-arduino/ says 0.026 * U - 13.51
-             datasheet at https://www.sparkfun.com/datasheets/BreakoutBoards/0712.pdf - 30A model has 66mV/A sensitivity 
+           http://embedded-lab.com/blog/?p=4529 says 0.0264 * (U - 512)
+           http://www.lucadentella.it/en/2011/11/29/sensore-di-corrente-con-arduino/ says 0.026 * U - 13.51
+           datasheet at https://www.sparkfun.com/datasheets/BreakoutBoards/0712.pdf - 20A model has 100mV/A sensitivity 
         */
-	float a0current = 0.0742 * readavg(0) - 37.87 ;
-	float a1current = 0.0742 * readavg(1) - 37.87 ;
+	float a0current = 0.049 * readavg(0) - 25 ;
+	float a1current = 0.049 * readavg(1) - 25 ;
 	float a2volts = readavg(2) / 12.55 ;
 	float a3volts = readavg(3) / 12.55 ;
 	float a4volts = readavg(4) / 12.76 ;
