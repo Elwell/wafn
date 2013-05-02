@@ -6,8 +6,11 @@
 
 byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(10,60,30, 3);
-IPAddress gateway(10,60,30, 1);
+IPAddress ip(10,60,30,3);
+IPAddress gateway(10,60,30,1);
+
+
+
 EthernetServer server(80);
 
 void setup() {
@@ -54,7 +57,7 @@ void loop() {
           client.println("<!DOCTYPE HTML>");
           client.println("<html><head>");
           // add a meta refresh tag, so the browser pulls again every 15 seconds:
-          client.println("<meta http-equiv=\"refresh\" content=\"15\">");
+          client.println("<meta http-equiv=\"refresh\" content=\"45\">");
           client.println("<title>TIC Hill monitoring</title>");
           client.println("</head><body>");
           // output the value of each analog input pin
@@ -62,20 +65,20 @@ void loop() {
 
 
   float average2 = 0;
-  for(int i2 = 0; i2 < 500; i2++) {
-    average2 = average2 + (.0264 * analogRead(A2) ) / 1023 * 6.20;
+  for(int i2 = 0; i2 < 10000; i2++) {
+    average2 = average2 + (.0264 * analogRead(A2) ) / 1023 * 0.32;
   }
   float average3 = 0;
-  for(int i3 = 0; i3 < 500; i3++) {
-    average3 = average3 + (.0264 * analogRead(A3) ) / 1023 * 6.20;
+  for(int i3 = 0; i3 < 10000; i3++) {
+    average3 = average3 + (.0264 * analogRead(A3) ) / 1023 * 0.32;
   }
   float average4 = 0;
-  for(int i4 = 0; i4 < 500; i4++) {
-    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
+  for(int i4 = 0; i4 < 10000; i4++) {
+    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 0.315;
   }
   float average5 = 0;
-  for(int i5 = 0; i5 < 500; i5++) {
-    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
+  for(int i5 = 0; i5 < 10000; i5++) {
+    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 0.222;
   }
 
   float average0 = 0;
@@ -86,53 +89,6 @@ void loop() {
   for(int i1 = 0; i1 < 1000; i1++) {
     average1 = average1 + (.0264 * analogRead(A1) -13.47) / 490;
 
-  }
-// Simple If statements to filter out valused below 12
-// First cycle
-if (average4 < 12)
-{
-  float average4 = 0;
-  for(int i4 = 0; i4 < 500; i4++) {
-    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
-  }
-}
-if (average5 < 12)
-{
-  float average5 = 0;
-  for(int i5 = 0; i5 < 500; i5++) {
-    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
-}
-  }
-// Second Cycle
-  if (average4 < 12)
-{
-  float average4 = 0;
-  for(int i4 = 0; i4 < 500; i4++) {
-    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
-  }
-}
-if (average5 < 12)
-{
-  float average5 = 0;
-  for(int i5 = 0; i5 < 500; i5++) {
-    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
-}
-  }
-// Third Cycle
-if (average4 < 12)
-{
-  float average4 = 0;
-  for(int i4 = 0; i4 < 500; i4++) {
-    average4 = average4 + (.0264 * analogRead(A4) ) / 1023 * 6.20;
-  }
-}
-  
-if (average5 < 12)
-{
-  float average5 = 0;
-  for(int i5 = 0; i5 < 500; i5++) {
-    average5 = average5 + (.0264 * analogRead(A5) ) / 1023 * 4.3;
-}
   }
 
   {
@@ -198,6 +154,42 @@ float ACC = average1 * average3 / 14.7;
           client.print(average5);
           client.println("}}");
           client.println("</pre>");
+          client.println("Graphing Below");
+          client.print("<br>");
+          client.print("GRAPHA0: ");
+          client.println(average0);
+          client.print("   ");
+          client.print("<br>");
+
+          client.print("GRAPHA1: ");
+          client.println(average1);
+          client.print("   ");
+          client.print("<br>");
+
+          client.print("GRAPHA2: ");
+          client.println(average2);
+          client.print("   ");
+          client.print("<br>");
+
+          client.print("GRAPHA3: ");
+          client.println(average3);
+          client.print("   ");
+          client.print("<br>");
+
+          client.print("GRAPHA4: ");
+          client.println(average4);
+          client.print("   ");
+          client.print("<br>");
+
+          client.print("GRAPHA5: ");
+          client.println(average5);
+          client.print("   ");
+          client.print("<br>");
+          
+          client.print("GRAPHA1C: ");
+          client.println(ACC);
+          client.print("   ");
+          client.print("<br>");
 
           client.println("<p>This page is served directly from a Freetronics EtherTen over the <a href=\"http://www.wafreenet.org/\">WAFreenet Wireless Network</a></p>");
           client.println("</body></html>");
@@ -220,5 +212,6 @@ float ACC = average1 * average3 / 14.7;
     // close the connection:
     client.stop();
     Serial.println("client disonnected");
-  }
+    // IRC Here
+}
 }
